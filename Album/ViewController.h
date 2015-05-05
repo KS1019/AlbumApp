@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QBImagePicker.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController{
+    NSMutableArray *PhotoArray;
+    
+    IBOutlet UIImageView *imview;
+}
 
 
 @end
