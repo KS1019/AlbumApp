@@ -12,6 +12,7 @@
 
 @interface ViewController : UIViewController{
     NSMutableArray *PhotoArray;
+    NSMutableArray *ResultsArray;
     
     PHAsset *asset;
     

@@ -37,65 +37,58 @@
 
 - (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didFinishPickingAssets:(NSArray *)assets {
     PhotoArray = [[NSMutableArray alloc]init];
+    ResultsArray = [[NSMutableArray alloc]init];
     for (asset in assets) {
         // Do something with the asset
-        
-        [PhotoArray addObject:asset];
-        
-    }
-    NSLog(@"----> %@ <----",PhotoArray);
-    [[PHImageManager defaultManager] requestImageForAsset:PhotoArray[0]
-                                               targetSize:CGSizeMake(300,300)
-                                              contentMode:PHImageContentModeAspectFit
-                                                  options:nil
-                                            resultHandler:^(UIImage *result, NSDictionary *info) {
-                                                if (result) {
-                                                    imview.image = result;//[UIImage imageNamed:@"face.jpg"];
-                                                    
-                                                    [self eguther];
-                                                }
-                                            }];
+        //[PhotoArray addObject:asset];
+        [[PHImageManager defaultManager] requestImageForAsset:asset
+                                                   targetSize:CGSizeMake(300,300)
+                                                  contentMode:PHImageContentModeAspectFit
+                                                      options:nil
+                                                resultHandler:^(UIImage *result, NSDictionary *info) {
+        if (result) {
+            imview.image = result;
+                                   CIImage *image = [CIImage imageWithCGImage:result.CGImage];
+                        CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeFace
+                            context:nil
+                            options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];
+                                                            
+                             NSDictionary *options = @{
+                                                                                      CIDetectorSmile: @(YES),
+                                                                                      CIDetectorEyeBlink: @(YES),
+                                                                                      };
+                                                            
+            NSArray *features = [detector featuresInImage:image options:options];
+                                                            
+            NSMutableString *resultStr = @"DETECTED FACES:\n\n".mutableCopy;
+                                                            
+                  for(CIFaceFeature *feature in features){
+                            [resultStr appendFormat:@"bounds:%@\n", NSStringFromCGRect(feature.bounds)];
+                            [resultStr appendFormat:@"hasSmile: %@\n\n", feature.hasSmile ? @"YES" : @"NO"];
+                                                            
+                                                            }
+                                                            
+      
+                                [ResultsArray addObject:resultStr];
+                                NSLog(@"<<<<<<< %@ >>>>>>>>>",resultStr);
+                            NSLog(@"%@",ResultsArray);
+            textView.text = [NSString stringWithFormat:@"%@",ResultsArray];
 
-    [self dismissViewControllerAnimated:YES completion:NULL];
+    
+            
+                        
+
+                                                    }
+                                                }];
+    }
+    //NSLog(@"----> %@ <----",PhotoArray);
+    //textView.text = [NSString stringWithFormat:@"%@",ResultsArray];
+    NSLog(@"6666666666%@666666666",ResultsArray);
+        [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController{
 [self dismissViewControllerAnimated:YES completion:NULL];
 }
--(void)eguther{
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        
-        CIImage *image = [CIImage imageWithCGImage:imview.image.CGImage];
-        CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeFace
-                                                  context:nil
-                                                  options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];
-        
-        NSDictionary *options = @{
-                                  CIDetectorSmile: @(YES),
-                                  CIDetectorEyeBlink: @(YES),
-                                  };
-        
-        NSArray *features = [detector featuresInImage:image options:options];
-        
-        NSMutableString *resultStr = @"DETECTED FACES:\n\n".mutableCopy;
-        
-        for(CIFaceFeature *feature in features)
-        {
-            [resultStr appendFormat:@"bounds:%@\n", NSStringFromCGRect(feature.bounds)];
-            [resultStr appendFormat:@"hasSmile: %@\n\n", feature.hasSmile ? @"YES" : @"NO"];
-            //        NSLog(@"faceAngle: %@", feature.hasFaceAngle ? @(feature.faceAngle) : @"NONE");
-            //        NSLog(@"leftEyeClosed: %@", feature.leftEyeClosed ? @"YES" : @"NO");
-            //        NSLog(@"rightEyeClosed: %@", feature.rightEyeClosed ? @"YES" : @"NO");
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-           
-            
-            textView.text = resultStr;
-            NSLog(@"<<<<<<< %@ >>>>>>>>>",resultStr);
-        });
-    });
-}
+
 @end
