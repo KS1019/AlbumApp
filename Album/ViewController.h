@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "QBImagePicker.h"
+#import <CoreImage/CoreImage.h>
 
 @interface ViewController : UIViewController{
     NSMutableArray *PhotoArray;
     
+    PHAsset *asset;
+    
     IBOutlet UIImageView *imview;
+    IBOutlet UITextView *textView;
 }
 
 

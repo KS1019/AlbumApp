@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    textView.editable = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,28 +37,65 @@
 
 - (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didFinishPickingAssets:(NSArray *)assets {
     PhotoArray = [[NSMutableArray alloc]init];
-    for (PHAsset *asset in assets) {
+    for (asset in assets) {
         // Do something with the asset
-        NSData *PhotoData = asset;
-        [[PHImageManager defaultManager] requestImageForAsset:asset
-                                                   targetSize:CGSizeMake(300,300)
-                                                  contentMode:PHImageContentModeAspectFit
-                                                      options:nil
-                                                resultHandler:^(UIImage *result, NSDictionary *info) {
-                                                    if (result) {
-                                                        imview = result;
-                                                    }
-                                                }];
-
-        [PhotoArray addObject:PhotoData];
+        
+        [PhotoArray addObject:asset];
         
     }
     NSLog(@"----> %@ <----",PhotoArray);
+    [[PHImageManager defaultManager] requestImageForAsset:PhotoArray[0]
+                                               targetSize:CGSizeMake(300,300)
+                                              contentMode:PHImageContentModeAspectFit
+                                                  options:nil
+                                            resultHandler:^(UIImage *result, NSDictionary *info) {
+                                                if (result) {
+                                                    imview.image = result;//[UIImage imageNamed:@"face.jpg"];
+                                                    
+                                                    [self eguther];
+                                                }
+                                            }];
+
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController{
 [self dismissViewControllerAnimated:YES completion:NULL];
 }
-
+-(void)eguther{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        
+        CIImage *image = [CIImage imageWithCGImage:imview.image.CGImage];
+        CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeFace
+                                                  context:nil
+                                                  options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];
+        
+        NSDictionary *options = @{
+                                  CIDetectorSmile: @(YES),
+                                  CIDetectorEyeBlink: @(YES),
+                                  };
+        
+        NSArray *features = [detector featuresInImage:image options:options];
+        
+        NSMutableString *resultStr = @"DETECTED FACES:\n\n".mutableCopy;
+        
+        for(CIFaceFeature *feature in features)
+        {
+            [resultStr appendFormat:@"bounds:%@\n", NSStringFromCGRect(feature.bounds)];
+            [resultStr appendFormat:@"hasSmile: %@\n\n", feature.hasSmile ? @"YES" : @"NO"];
+            //        NSLog(@"faceAngle: %@", feature.hasFaceAngle ? @(feature.faceAngle) : @"NONE");
+            //        NSLog(@"leftEyeClosed: %@", feature.leftEyeClosed ? @"YES" : @"NO");
+            //        NSLog(@"rightEyeClosed: %@", feature.rightEyeClosed ? @"YES" : @"NO");
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+           
+            
+            textView.text = resultStr;
+            NSLog(@"<<<<<<< %@ >>>>>>>>>",resultStr);
+        });
+    });
+}
 @end
