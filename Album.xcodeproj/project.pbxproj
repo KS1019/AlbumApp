@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7C1364CA1AF88CB80048A3FE /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1364C91AF88CB80048A3FE /* CoreImage.framework */; };
 		7C1364CC1AF890A70048A3FE /* face.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7C1364CB1AF890A70048A3FE /* face.jpg */; };
+		7C1364CF1AF8F0160048A3FE /* PhotoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1364CE1AF8F0160048A3FE /* PhotoData.m */; };
 		7C34C5B51AF737EE007347F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34C5B41AF737EE007347F0 /* main.m */; };
 		7C34C5B81AF737EE007347F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34C5B71AF737EE007347F0 /* AppDelegate.m */; };
 		7C34C5BB1AF737EE007347F0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34C5BA1AF737EE007347F0 /* ViewController.m */; };
@@ -44,6 +45,8 @@
 /* Begin PBXFileReference section */
 		7C1364C91AF88CB80048A3FE /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		7C1364CB1AF890A70048A3FE /* face.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = face.jpg; path = ../../face.jpg; sourceTree = "<group>"; };
+		7C1364CD1AF8F0160048A3FE /* PhotoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoData.h; sourceTree = "<group>"; };
+		7C1364CE1AF8F0160048A3FE /* PhotoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoData.m; sourceTree = "<group>"; };
 		7C34C5AF1AF737EE007347F0 /* Album.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Album.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C34C5B31AF737EE007347F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C34C5B41AF737EE007347F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 				7C34C5B71AF737EE007347F0 /* AppDelegate.m */,
 				7C34C5B91AF737EE007347F0 /* ViewController.h */,
 				7C34C5BA1AF737EE007347F0 /* ViewController.m */,
+				7C1364CD1AF8F0160048A3FE /* PhotoData.h */,
+				7C1364CE1AF8F0160048A3FE /* PhotoData.m */,
 				7C34C5BC1AF737EE007347F0 /* Main.storyboard */,
 				7C34C5BF1AF737EE007347F0 /* Images.xcassets */,
 				7C34C5C11AF737EE007347F0 /* LaunchScreen.xib */,
@@ -301,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C1364CF1AF8F0160048A3FE /* PhotoData.m in Sources */,
 				7C34C5F51AF85900007347F0 /* QBAlbumCell.m in Sources */,
 				7C34C5F81AF85900007347F0 /* QBAssetsViewController.m in Sources */,
 				7C34C5FB1AF85900007347F0 /* QBImagePickerController.m in Sources */,

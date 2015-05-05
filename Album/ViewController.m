@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "PhotoData.h"
 
 @interface ViewController ()
 
@@ -19,6 +20,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     textView.editable = NO;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,9 +38,12 @@
 }
 
 - (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didFinishPickingAssets:(NSArray *)assets {
-       ResultsArray = [[NSMutableArray alloc]init];
+       resultsArray = [[NSMutableArray alloc]init];
     for (asset in assets) {
         // Do something with the asset
+        
+        NSLog(@"%@", asset);
+        
         [[PHImageManager defaultManager] requestImageForAsset:asset
                                                    targetSize:CGSizeMake(300,300)
                                                   contentMode:PHImageContentModeAspectFit
@@ -46,6 +51,9 @@
                                                 resultHandler:^(UIImage *result, NSDictionary *info) {
             if (result) {
                 imview.image = result;
+                PhotoData *photoData = [[PhotoData alloc] init];
+                photoData.image = result;
+                
                 CIImage *image = [CIImage imageWithCGImage:result.CGImage];
                 CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeFace
                                                           context:nil
@@ -54,34 +62,53 @@
                 NSDictionary *options = @{CIDetectorSmile: @(YES),
                                           CIDetectorEyeBlink: @(YES),
                                         };
-                                                                
+
+#warning features 0 after ditect features
                 NSArray *features = [detector featuresInImage:image options:options];
-                NSMutableString *resultStr = [NSMutableString string];
-                [resultStr appendString:@"DETECTED FACES:\n\n"];
-                                                                
+                
                 for(CIFaceFeature *feature in features){
+                    
+                    [photoData.features addObject:feature];
+                    [photoData.boundsArray addObject:NSStringFromCGRect(feature.bounds)];
+                    [photoData.smileArray addObject:[NSNumber numberWithBool:feature.hasSmile]];
+                    
+                    /*
                     [resultStr appendFormat:@"bounds:%@\n", NSStringFromCGRect(feature.bounds)];
                     [resultStr appendFormat:@"hasSmile: %@\n\n", feature.hasSmile ? @"YES" : @"NO"];
-                    }
-                [ResultsArray addObject:resultStr];
-
+                    NSLog(@"%d", feature.hasSmile);
+                        if (feature.hasSmile == NO) {
+                            NSLog(@"miss");
+                        }else if(feature.hasSmile == YES) {
+                            NSLog(@"hit");
+                        }
+                     */
+                }
                 
-          
-                NSLog(@"<<<<<<< %@ >>>>>>>>>",resultStr);
-                NSLog(@"%@",ResultsArray);
-               
-                            
+                [resultsArray addObject:photoData];
+                
+                NSLog(@"<<<<<<< %@ >>>>>>>>>",resultsArray);
 
             }
                                                     
         }];
 
     }
-    //NSLog(@"----> %@ <----",PhotoArray);
     //textView.text = [NSString stringWithFormat:@"%@",ResultsArray];
-    NSLog(@"6666666666%@666666666",ResultsArray);
-    textView.text = [NSString stringWithFormat:@"%@",ResultsArray];
-        [self dismissViewControllerAnimated:YES completion:NULL];
+    NSLog(@"%@",resultsArray);
+    NSMutableArray *imageArray = [NSMutableArray new];
+    NSMutableArray *smileArray = [NSMutableArray new];
+    NSMutableArray *boundsArray = [NSMutableArray new];
+    
+    for (PhotoData *p in resultsArray) {
+        [imageArray addObject:p.image];
+        [smileArray addObject:p.smileArray];
+        [boundsArray addObject:p.boundsArray];
+    }
+    
+    imview.image = imageArray[0];
+    
+    textView.text = [NSString stringWithFormat:@"image == %@ \n smile == %@ \n bounds == %@", imageArray, smileArray, boundsArray];
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController{
