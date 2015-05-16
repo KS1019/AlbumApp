@@ -9,12 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "QBImagePicker.h"
 #import <CoreImage/CoreImage.h>
+#import "PhotoData.h"
+
 
 @interface ViewController : UIViewController{
     NSMutableArray *PhotoArray;
     NSMutableArray *resultsArray;
     
+    NSMutableArray *imArray;
+    NSMutableArray *smArray;
+    NSMutableArray *boArray;
+    
     PHAsset *asset;
+    
+    PhotoData *photoData;
     
     IBOutlet UIImageView *imview;
     IBOutlet UITextView *textView;

@@ -38,6 +38,11 @@
 }
 
 - (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didFinishPickingAssets:(NSArray *)assets {
+    
+    photoData = [[PhotoData alloc] init];
+    smArray = [[NSMutableArray alloc]init];
+    boArray = [[NSMutableArray alloc]init];
+
        resultsArray = [[NSMutableArray alloc]init];
     for (asset in assets) {
         // Do something with the asset
@@ -51,10 +56,10 @@
                                                 resultHandler:^(UIImage *result, NSDictionary *info) {
             if (result) {
                 imview.image = result;
-                PhotoData *photoData = [[PhotoData alloc] init];
+                imview.image = [UIImage imageNamed:@"face.jpg"];
                 photoData.image = result;
-                
                 CIImage *image = [CIImage imageWithCGImage:result.CGImage];
+                //CIImage *image = [CIImage imageWithCGImage:[UIImage imageNamed:@"face.jpg"]];
                 CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeFace
                                                           context:nil
                                                           options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];
@@ -62,31 +67,23 @@
                 NSDictionary *options = @{CIDetectorSmile: @(YES),
                                           CIDetectorEyeBlink: @(YES),
                                         };
-
 #warning features 0 after ditect features
                 NSArray *features = [detector featuresInImage:image options:options];
-                
+            
                 for(CIFaceFeature *feature in features){
-                    
-                    [photoData.features addObject:feature];
-                    [photoData.boundsArray addObject:NSStringFromCGRect(feature.bounds)];
-                    [photoData.smileArray addObject:[NSNumber numberWithBool:feature.hasSmile]];
-                    
-                    /*
-                    [resultStr appendFormat:@"bounds:%@\n", NSStringFromCGRect(feature.bounds)];
-                    [resultStr appendFormat:@"hasSmile: %@\n\n", feature.hasSmile ? @"YES" : @"NO"];
-                    NSLog(@"%d", feature.hasSmile);
-                        if (feature.hasSmile == NO) {
-                            NSLog(@"miss");
-                        }else if(feature.hasSmile == YES) {
-                            NSLog(@"hit");
-                        }
-                     */
+                    [imArray addObject:result];
+                    [smArray addObject:[NSNumber numberWithBool:feature.hasSmile]];
+                    [boArray addObject:[NSValue valueWithCGRect:feature.bounds]];
+                    //[photoData.smileArray addObject:[NSNumber numberWithBool:feature.hasSmile]];
+                    //[photoData.boundsArray addObject:[NSValue valueWithCGRect:feature.bounds]];
+                    [resultsArray addObject:photoData];
+                     textView.text = [NSString stringWithFormat:@"image == %@ \n smile == %@ \n bounds == %@", imArray, smArray, boArray];
                 }
                 
-                [resultsArray addObject:photoData];
+                 
                 
                 NSLog(@"<<<<<<< %@ >>>>>>>>>",resultsArray);
+                NSLog(@"  %@    -------      %@      ",smArray, boArray);
 
             }
                                                     
@@ -105,9 +102,10 @@
         [boundsArray addObject:p.boundsArray];
     }
     
-    imview.image = imageArray[0];
+    //imview.image = imageArray[0];
+    NSLog(@"%@",smileArray);
     
-    textView.text = [NSString stringWithFormat:@"image == %@ \n smile == %@ \n bounds == %@", imageArray, smileArray, boundsArray];
+//    textView.text = [NSString stringWithFormat:@"image == %@ \n smile == %@ \n bounds == %@", imageArray, smileArray, boundsArray];
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
