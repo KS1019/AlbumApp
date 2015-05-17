@@ -20,6 +20,9 @@
     NSMutableArray *smArray;
     NSMutableArray *boArray;
     
+    NSMutableDictionary *pointsDictionary;
+    
+    
     PHAsset *asset;
     
     PhotoData *photoData;

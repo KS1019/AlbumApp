@@ -20,6 +20,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     textView.editable = NO;
+    pointsDictionary = [NSMutableDictionary dictionary];
     
 }
 
@@ -42,8 +43,10 @@
     photoData = [[PhotoData alloc] init];
     smArray = [[NSMutableArray alloc]init];
     boArray = [[NSMutableArray alloc]init];
-
-       resultsArray = [[NSMutableArray alloc]init];
+    resultsArray = [[NSMutableArray alloc]init];
+    
+    
+    NSLog(@"ASSETS COUNT %ld", assets.count);
     for (asset in assets) {
         // Do something with the asset
         
@@ -54,12 +57,13 @@
                                                   contentMode:PHImageContentModeAspectFit
                                                       options:nil
                                                 resultHandler:^(UIImage *result, NSDictionary *info) {
+                                                    NSString *localIdentifier = [NSString new];
             if (result) {
+                //result = [UIImage imageNamed:@"face.jpg"];
+                int pt = 0;
                 imview.image = result;
-                imview.image = [UIImage imageNamed:@"face.jpg"];
                 photoData.image = result;
                 CIImage *image = [CIImage imageWithCGImage:result.CGImage];
-                //CIImage *image = [CIImage imageWithCGImage:[UIImage imageNamed:@"face.jpg"]];
                 CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeFace
                                                           context:nil
                                                           options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];
@@ -69,29 +73,30 @@
                                         };
 #warning features 0 after ditect features
                 NSArray *features = [detector featuresInImage:image options:options];
-            
+                
+                NSLog(@"FEATURES COUNT %ld", features.count);
+                if (asset) {
                 for(CIFaceFeature *feature in features){
-                    [imArray addObject:result];
-                    [smArray addObject:[NSNumber numberWithBool:feature.hasSmile]];
-                    [boArray addObject:[NSValue valueWithCGRect:feature.bounds]];
-                    //[photoData.smileArray addObject:[NSNumber numberWithBool:feature.hasSmile]];
-                    //[photoData.boundsArray addObject:[NSValue valueWithCGRect:feature.bounds]];
-                    [resultsArray addObject:photoData];
-                     textView.text = [NSString stringWithFormat:@"image == %@ \n smile == %@ \n bounds == %@", imArray, smArray, boArray];
+                      pt = pt + 1;
+                    if (feature.hasSmile == YES) {
+                        pt = pt + 2;
+                    }
+                    //textView.text = [NSString stringWithFormat:@"image == %@ \n smile == %@ \n bounds == %@", imArray, smArray, boArray];
                 }
-                
-                 
-                
-                NSLog(@"<<<<<<< %@ >>>>>>>>>",resultsArray);
-                NSLog(@"  %@    -------      %@      ",smArray, boArray);
-
+                NSNumber *pointNum = [NSNumber numberWithInt:pt];
+                localIdentifier = asset.localIdentifier;
+                NSLog(@"localIdentifier=%@ \n pointNum=%@",localIdentifier,pointNum);
+                [pointsDictionary setObject:pointNum forKey:localIdentifier];
+                NSLog(@"pointsDictionary===%@",pointsDictionary);
+                NSLog(@"localIdentifier===%@",localIdentifier);
+                NSLog(@"pointNum===%@",pointNum);
+                }
             }
                                                     
         }];
-
-    }
+}
     //textView.text = [NSString stringWithFormat:@"%@",ResultsArray];
-    NSLog(@"%@",resultsArray);
+ /* NSLog(@"%@",resultsArray);
     NSMutableArray *imageArray = [NSMutableArray new];
     NSMutableArray *smileArray = [NSMutableArray new];
     NSMutableArray *boundsArray = [NSMutableArray new];
@@ -100,10 +105,10 @@
         [imageArray addObject:p.image];
         [smileArray addObject:p.smileArray];
         [boundsArray addObject:p.boundsArray];
-    }
+    }*/
     
     //imview.image = imageArray[0];
-    NSLog(@"%@",smileArray);
+    //NSLog(@"%@",smileArray);
     
 //    textView.text = [NSString stringWithFormat:@"image == %@ \n smile == %@ \n bounds == %@", imageArray, smileArray, boundsArray];
     [self dismissViewControllerAnimated:YES completion:NULL];
