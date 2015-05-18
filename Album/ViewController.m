@@ -50,6 +50,7 @@
     for (asset in assets) {
         // Do something with the asset
         
+        
         NSLog(@"%@", asset);
         
         [[PHImageManager defaultManager] requestImageForAsset:asset
@@ -75,8 +76,10 @@
                 NSArray *features = [detector featuresInImage:image options:options];
                 
                 NSLog(@"FEATURES COUNT %ld", features.count);
-                if (asset) {
+                if (features) {
+                    NSLog(@"if was called");
                 for(CIFaceFeature *feature in features){
+                    NSLog(@"for was called");
                       pt = pt + 1;
                     if (feature.hasSmile == YES) {
                         pt = pt + 2;
