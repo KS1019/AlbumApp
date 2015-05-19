@@ -61,6 +61,7 @@
                                                     NSString *localIdentifier = [NSString new];
             if (result) {
                 //result = [UIImage imageNamed:@"face.jpg"];
+                //
                 int pt = 0;
                 imview.image = result;
                 photoData.image = result;
