@@ -21,6 +21,8 @@
     
     textView.editable = NO;
     pointsDictionary = [NSMutableDictionary dictionary];
+    pt = 0;
+    localIdentifier = [NSString new];
     
 }
 
@@ -48,6 +50,7 @@
     
     NSLog(@"ASSETS COUNT %ld", assets.count);
     for (asset in assets) {
+        
         // Do something with the asset
         
         
@@ -58,12 +61,12 @@
                                                   contentMode:PHImageContentModeAspectFit
                                                       options:nil
                                                 resultHandler:^(UIImage *result, NSDictionary *info) {
-                                                    NSString *localIdentifier = [NSString new];
+                                                    //NSString *localIdentifier = [NSString new];
             if (result) {
                 //result = [UIImage imageNamed:@"face.jpg"];
                 //
                 //
-                int pt = 0;
+                
                 imview.image = result;
                 photoData.image = result;
                 CIImage *image = [CIImage imageWithCGImage:result.CGImage];
@@ -75,11 +78,13 @@
                                           CIDetectorEyeBlink: @(YES),
                                         };
 #warning features 0 after ditect features
-                NSArray *features = [detector featuresInImage:image options:options];
+                features = [detector featuresInImage:image options:options];
                 
                 NSLog(@"FEATURES COUNT %ld", features.count);
-                if (features) {
+                
+                if (0<features.count) {
                     NSLog(@"if was called");
+                    /*
                 for(CIFaceFeature *feature in features){
                     NSLog(@"for was called");
                       pt = pt + 1;
@@ -95,6 +100,8 @@
                 NSLog(@"pointsDictionary===%@",pointsDictionary);
                 NSLog(@"localIdentifier===%@",localIdentifier);
                 NSLog(@"pointNum===%@",pointNum);
+                 */
+                    [self setPoint];
                 }
             }
                                                     
@@ -121,6 +128,25 @@
 
 - (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController{
 [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+-(void)setPoint{
+    NSLog(@"setPoint was called");
+    for(CIFaceFeature *feature in features){
+        NSLog(@"for was called");
+        pt = pt + 1;
+        if (feature.hasSmile == YES) {
+            pt = pt + 2;
+        }
+        //textView.text = [NSString stringWithFormat:@"image == %@ \n smile == %@ \n bounds == %@", imArray, smArray, boArray];
+    }
+    NSNumber *pointNum = [NSNumber numberWithInt:pt];
+    localIdentifier = asset.localIdentifier;
+    NSLog(@"localIdentifier=%@ \n pointNum=%@",localIdentifier,pointNum);
+    [pointsDictionary setObject:pointNum forKey:localIdentifier];
+    NSLog(@"pointsDictionary===%@",pointsDictionary);
+    NSLog(@"localIdentifier===%@",localIdentifier);
+    NSLog(@"pointNum===%@",pointNum);
 }
 
 @end

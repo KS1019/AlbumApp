@@ -22,6 +22,14 @@
     
     NSMutableDictionary *pointsDictionary;
     
+    NSArray *features;
+    
+    NSString *localIdentifier;
+    
+    int pt;
+    
+    
+    
     
     PHAsset *asset;
     
