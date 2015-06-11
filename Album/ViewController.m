@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "PhotoData.h"
 
-@interface ViewController ()
+@interface ViewController ()<QBImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
 
@@ -21,14 +21,15 @@
     
     textView.editable = NO;
     pointsDictionary = [NSMutableDictionary dictionary];
-    pt = 0;
-    localIdentifier = [NSString new];
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)test{
+    NSLog(@"pointsDictionary--->%@",pointsDictionary);
 }
 
 -(IBAction)start:(id)sender{
@@ -49,12 +50,17 @@
     
     
     NSLog(@"ASSETS COUNT %ld", assets.count);
+    NSLog(@"ASSETS === %@",assets);
     for (asset in assets) {
         
         // Do something with the asset
         
         
         NSLog(@"%@", asset);
+        assetData = asset;
+        NSString *localIdentifier = assetData.localIdentifier;
+        NSLog(@"NOW LOCALIDENTIFIER == %@",assetData.localIdentifier);
+
         
         [[PHImageManager defaultManager] requestImageForAsset:asset
                                                    targetSize:CGSizeMake(300,300)
@@ -63,10 +69,7 @@
                                                 resultHandler:^(UIImage *result, NSDictionary *info) {
                                                     //NSString *localIdentifier = [NSString new];
             if (result) {
-                //result = [UIImage imageNamed:@"face.jpg"];
-                //
-                //
-                
+                NSLog(@"result was called");
                 imview.image = result;
                 photoData.image = result;
                 CIImage *image = [CIImage imageWithCGImage:result.CGImage];
@@ -77,52 +80,47 @@
                 NSDictionary *options = @{CIDetectorSmile: @(YES),
                                           CIDetectorEyeBlink: @(YES),
                                         };
-#warning features 0 after ditect features
+                
+                
                 features = [detector featuresInImage:image options:options];
                 
                 NSLog(@"FEATURES COUNT %ld", features.count);
                 
-                if (0<features.count) {
+                if (features) {
                     NSLog(@"if was called");
-                    /*
-                for(CIFaceFeature *feature in features){
-                    NSLog(@"for was called");
-                      pt = pt + 1;
-                    if (feature.hasSmile == YES) {
-                        pt = pt + 2;
+                    //[self setPoint];
+                    int pt = 0;
+                    
+                    for(CIFaceFeature *feature in features){
+                        NSLog(@"for was called");
+                        
+                        pt = pt + 1;
+                        if (feature.hasSmile == YES) {
+                            NSLog(@"================hasSmile===================");
+                            pt = pt + 2;
+                        }
+                        //textView.text = [NSString stringWithFormat:@"image == %@ \n smile == %@ \n bounds == %@", imArray, smArray, boArray];
                     }
-                    //textView.text = [NSString stringWithFormat:@"image == %@ \n smile == %@ \n bounds == %@", imArray, smArray, boArray];
-                }
-                NSNumber *pointNum = [NSNumber numberWithInt:pt];
-                localIdentifier = asset.localIdentifier;
-                NSLog(@"localIdentifier=%@ \n pointNum=%@",localIdentifier,pointNum);
-                [pointsDictionary setObject:pointNum forKey:localIdentifier];
-                NSLog(@"pointsDictionary===%@",pointsDictionary);
-                NSLog(@"localIdentifier===%@",localIdentifier);
-                NSLog(@"pointNum===%@",pointNum);
-                 */
-                    [self setPoint];
+                    
+                    if (pt > 0) {
+                        NSNumber *pointNum = [NSNumber numberWithInt:pt];
+                        //    localIdentifier = assetData.localIdentifier;
+                        NSLog(@"localIdentifier=%@ \n pointNum=%@",localIdentifier,pointNum);
+                        [pointsDictionary setObject:pointNum forKey:localIdentifier];
+                        NSLog(@"pointsDictionary===%@",pointsDictionary);
+                        NSLog(@"localIdentifier===%@",localIdentifier);
+                        NSLog(@"pointNum===%@",pointNum);
+                    }
+                }else{
+                    NSLog(@"else was called");
+                    NSNumber *num = 0;
+                    [pointsDictionary setObject:num forKey:localIdentifier];
                 }
             }
                                                     
         }];
-}
-    //textView.text = [NSString stringWithFormat:@"%@",ResultsArray];
- /* NSLog(@"%@",resultsArray);
-    NSMutableArray *imageArray = [NSMutableArray new];
-    NSMutableArray *smileArray = [NSMutableArray new];
-    NSMutableArray *boundsArray = [NSMutableArray new];
-    
-    for (PhotoData *p in resultsArray) {
-        [imageArray addObject:p.image];
-        [smileArray addObject:p.smileArray];
-        [boundsArray addObject:p.boundsArray];
-    }*/
-    
-    //imview.image = imageArray[0];
-    //NSLog(@"%@",smileArray);
-    
-//    textView.text = [NSString stringWithFormat:@"image == %@ \n smile == %@ \n bounds == %@", imageArray, smileArray, boundsArray];
+    }
+
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -130,23 +128,33 @@
 [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+/*
 -(void)setPoint{
     NSLog(@"setPoint was called");
+    int pt = 0;
+    
     for(CIFaceFeature *feature in features){
         NSLog(@"for was called");
+        
         pt = pt + 1;
         if (feature.hasSmile == YES) {
+            NSLog(@"================hasSmile===================");
             pt = pt + 2;
         }
         //textView.text = [NSString stringWithFormat:@"image == %@ \n smile == %@ \n bounds == %@", imArray, smArray, boArray];
     }
-    NSNumber *pointNum = [NSNumber numberWithInt:pt];
-    localIdentifier = asset.localIdentifier;
-    NSLog(@"localIdentifier=%@ \n pointNum=%@",localIdentifier,pointNum);
-    [pointsDictionary setObject:pointNum forKey:localIdentifier];
-    NSLog(@"pointsDictionary===%@",pointsDictionary);
-    NSLog(@"localIdentifier===%@",localIdentifier);
-    NSLog(@"pointNum===%@",pointNum);
+    
+    if (pt > 0) {
+        NSNumber *pointNum = [NSNumber numberWithInt:pt];
+        //    localIdentifier = assetData.localIdentifier;
+        NSLog(@"localIdentifier=%@ \n pointNum=%@",localIdentifier,pointNum);
+        [pointsDictionary setObject:pointNum forKey:localIdentifier];
+        NSLog(@"pointsDictionary===%@",pointsDictionary);
+        NSLog(@"localIdentifier===%@",localIdentifier);
+        NSLog(@"pointNum===%@",pointNum);
+    }
 }
+ 
+ */
 
 @end

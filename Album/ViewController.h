@@ -23,15 +23,13 @@
     NSMutableDictionary *pointsDictionary;
     
     NSArray *features;
-    
-    NSString *localIdentifier;
-    
-    int pt;
+    //int pt;
     
     
     
     
     PHAsset *asset;
+    PHAsset *assetData;
     
     PhotoData *photoData;
     
