@@ -55,5 +55,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--Show Photos View Controller-->
+        <scene sceneID="A0z-9p-r6D">
+            <objects>
+                <viewController storyboardIdentifier="ShowPhotosViewController" id="1En-pd-qgi" customClass="ShowPhotosViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YVR-kf-0ix"/>
+                        <viewControllerLayoutGuide type="bottom" id="wtt-FX-ika"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rfn-3m-wy8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EYw-QL-bPv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="721.5" y="243.5"/>
+        </scene>
     </scenes>
 </document>

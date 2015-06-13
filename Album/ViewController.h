@@ -10,6 +10,7 @@
 #import "QBImagePicker.h"
 #import <CoreImage/CoreImage.h>
 #import "PhotoData.h"
+#import "ShowPhotosViewController.h"
 
 
 @interface ViewController : UIViewController{
@@ -19,6 +20,7 @@
     NSMutableArray *imArray;
     NSMutableArray *smArray;
     NSMutableArray *boArray;
+    NSMutableArray *idArray;
     
     NSMutableDictionary *pointsDictionary;
     

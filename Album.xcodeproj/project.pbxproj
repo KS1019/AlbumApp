@@ -30,6 +30,7 @@
 		7C34C5FC1AF85900007347F0 /* QBSlomoIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34C5EE1AF85900007347F0 /* QBSlomoIconView.m */; };
 		7C34C5FD1AF85900007347F0 /* QBVideoIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34C5F01AF85900007347F0 /* QBVideoIconView.m */; };
 		7C34C5FE1AF85900007347F0 /* QBVideoIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34C5F21AF85900007347F0 /* QBVideoIndicatorView.m */; };
+		7C7379A71B2C108C0075A9BA /* ShowPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7379A61B2C108C0075A9BA /* ShowPhotosViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,8 @@
 		7C34C5F01AF85900007347F0 /* QBVideoIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBVideoIconView.m; sourceTree = "<group>"; };
 		7C34C5F11AF85900007347F0 /* QBVideoIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBVideoIndicatorView.h; sourceTree = "<group>"; };
 		7C34C5F21AF85900007347F0 /* QBVideoIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBVideoIndicatorView.m; sourceTree = "<group>"; };
+		7C7379A51B2C108C0075A9BA /* ShowPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowPhotosViewController.h; sourceTree = "<group>"; };
+		7C7379A61B2C108C0075A9BA /* ShowPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowPhotosViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +141,8 @@
 				7C1364CD1AF8F0160048A3FE /* PhotoData.h */,
 				7C1364CE1AF8F0160048A3FE /* PhotoData.m */,
 				7C34C5BC1AF737EE007347F0 /* Main.storyboard */,
+				7C7379A51B2C108C0075A9BA /* ShowPhotosViewController.h */,
+				7C7379A61B2C108C0075A9BA /* ShowPhotosViewController.m */,
 				7C34C5BF1AF737EE007347F0 /* Images.xcassets */,
 				7C34C5C11AF737EE007347F0 /* LaunchScreen.xib */,
 				7C34C5B21AF737EE007347F0 /* Supporting Files */,
@@ -316,6 +321,7 @@
 				7C34C5BB1AF737EE007347F0 /* ViewController.m in Sources */,
 				7C34C5FE1AF85900007347F0 /* QBVideoIndicatorView.m in Sources */,
 				7C34C5F71AF85900007347F0 /* QBAssetCell.m in Sources */,
+				7C7379A71B2C108C0075A9BA /* ShowPhotosViewController.m in Sources */,
 				7C34C5B81AF737EE007347F0 /* AppDelegate.m in Sources */,
 				7C34C5B51AF737EE007347F0 /* main.m in Sources */,
 				7C34C5FD1AF85900007347F0 /* QBVideoIconView.m in Sources */,

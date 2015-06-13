@@ -21,6 +21,7 @@
     
     textView.editable = NO;
     pointsDictionary = [NSMutableDictionary dictionary];
+    idArray = [NSMutableArray new];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,30 +105,43 @@
                     
                     if (pt > 0) {
                         NSNumber *pointNum = [NSNumber numberWithInt:pt];
-                        //    localIdentifier = assetData.localIdentifier;
                         NSLog(@"localIdentifier=%@ \n pointNum=%@",localIdentifier,pointNum);
                         [pointsDictionary setObject:pointNum forKey:localIdentifier];
                         NSLog(@"pointsDictionary===%@",pointsDictionary);
                         NSLog(@"localIdentifier===%@",localIdentifier);
                         NSLog(@"pointNum===%@",pointNum);
+                    }else if(pt == 0){
+                        NSLog(@"else was called");
+                       // NSNumber *num = 0;
+                        [pointsDictionary setObject:@"0" forKey:localIdentifier];
+                      //[pointsDictionary setObject:[NSNull null] forKey:localIdentifier];
+
                     }
-                }else{
-                    NSLog(@"else was called");
-                    NSNumber *num = 0;
-                    [pointsDictionary setObject:num forKey:localIdentifier];
                 }
+                
             }
                                                     
         }];
     }
-
+    NSArray *array = pointsDictionary;
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES];
+    NSArray *sortedArray = [[[array lastObject] allValues] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    
     [self dismissViewControllerAnimated:YES completion:NULL];
+    [self goToSHVC];
+    
 }
 
 - (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController{
 [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+-(void)goToSHVC{
+    ShowPhotosViewController *SHVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ShowPhotosViewController"];
+    SHVC.photosDic = pointsDictionary;
+    [self presentViewController:SHVC animated:YES completion:nil];
+    
+}
 /*
 -(void)setPoint{
     NSLog(@"setPoint was called");
