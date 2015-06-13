@@ -123,11 +123,17 @@
                                                     
         }];
     }
-    NSArray *array = pointsDictionary;
+    int countOfPoints = [pointsDictionary count];
+    NSArray *pointsArray = [pointsDictionary allValues];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES];
-    NSArray *sortedArray = [[[array lastObject]allValues] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    NSArray *sortedArray = [pointsArray sortedArrayUsingDescriptors:@[sortDescriptor]];
     NSLog(@"=========================\n\n\n\n\n\n\n\n\n\n\nsortedArray----->>>%@\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n=========================",sortedArray);
+    for (int i = 0; i<countOfPoints; i++) {
+        NSArray *array =  [pointsDictionary allKeysForObject:[sortedArray objectAtIndex:i]];
+        [idArray addObject:array];
     
+    }
+    NSLog(@"=========================\n\n\n\n\n\n\n\n\n\n\nidArray----->>>%@\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n=========================",idArray);
     [self dismissViewControllerAnimated:YES completion:NULL];
     [self goToSHVC];
     
