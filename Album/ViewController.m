@@ -125,7 +125,8 @@
     }
     NSArray *array = pointsDictionary;
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES];
-    NSArray *sortedArray = [[[array lastObject] allValues] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    NSArray *sortedArray = [[[array lastObject]allValues] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    NSLog(@"=========================\n\n\n\n\n\n\n\n\n\n\nsortedArray----->>>%@\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n=========================",sortedArray);
     
     [self dismissViewControllerAnimated:YES completion:NULL];
     [self goToSHVC];

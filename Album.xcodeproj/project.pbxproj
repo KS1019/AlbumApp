@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7C1364CA1AF88CB80048A3FE /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1364C91AF88CB80048A3FE /* CoreImage.framework */; };
-		7C1364CC1AF890A70048A3FE /* face.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7C1364CB1AF890A70048A3FE /* face.jpg */; };
 		7C1364CF1AF8F0160048A3FE /* PhotoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1364CE1AF8F0160048A3FE /* PhotoData.m */; };
 		7C34C5B51AF737EE007347F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34C5B41AF737EE007347F0 /* main.m */; };
 		7C34C5B81AF737EE007347F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34C5B71AF737EE007347F0 /* AppDelegate.m */; };
@@ -45,7 +44,6 @@
 
 /* Begin PBXFileReference section */
 		7C1364C91AF88CB80048A3FE /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		7C1364CB1AF890A70048A3FE /* face.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = face.jpg; path = ../../face.jpg; sourceTree = "<group>"; };
 		7C1364CD1AF8F0160048A3FE /* PhotoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoData.h; sourceTree = "<group>"; };
 		7C1364CE1AF8F0160048A3FE /* PhotoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoData.m; sourceTree = "<group>"; };
 		7C34C5AF1AF737EE007347F0 /* Album.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Album.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,7 +110,6 @@
 		7C34C5A61AF737EE007347F0 = {
 			isa = PBXGroup;
 			children = (
-				7C1364CB1AF890A70048A3FE /* face.jpg */,
 				7C1364C91AF88CB80048A3FE /* CoreImage.framework */,
 				7C34C5D81AF73CF9007347F0 /* Photos.framework */,
 				7C34C5B11AF737EE007347F0 /* Album */,
@@ -293,7 +290,6 @@
 				7C34C5F41AF85900007347F0 /* Info.plist in Resources */,
 				7C34C5C01AF737EE007347F0 /* Images.xcassets in Resources */,
 				7C34C5FA1AF85900007347F0 /* QBImagePicker.storyboard in Resources */,
-				7C1364CC1AF890A70048A3FE /* face.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
