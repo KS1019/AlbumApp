@@ -125,7 +125,7 @@
     }
     int countOfPoints = [pointsDictionary count];
     NSArray *pointsArray = [pointsDictionary allValues];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:nil ascending:NO];
     NSArray *sortedArray = [pointsArray sortedArrayUsingDescriptors:@[sortDescriptor]];
     NSLog(@"=========================\n\n\n\n\n\n\n\n\n\n\nsortedArray----->>>%@\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n=========================",sortedArray);
     for (int i = 0; i<countOfPoints; i++) {
