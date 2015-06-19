@@ -112,7 +112,7 @@
                         NSLog(@"pointNum===%@",pointNum);
                     }else if(pt == 0){
                         NSLog(@"else was called");
-                       // NSNumber *num = 0;
+                        //NSNumber *num = 0;
                         [pointsDictionary setObject:@"0" forKey:localIdentifier];
                       //[pointsDictionary setObject:[NSNull null] forKey:localIdentifier];
 
@@ -131,12 +131,11 @@
     for (int i = 0; i<countOfPoints; i++) {
         NSArray *array =  [pointsDictionary allKeysForObject:[sortedArray objectAtIndex:i]];
         [idArray addObject:array];
-    
     }
     NSLog(@"=========================\n\n\n\n\n\n\n\n\n\n\nidArray----->>>%@\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n=========================",idArray);
     [self dismissViewControllerAnimated:YES completion:NULL];
+    [self test];
     [self goToSHVC];
-    
 }
 
 - (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController{
