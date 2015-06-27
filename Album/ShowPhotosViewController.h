@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Photos/Photos.h>
 
 @interface ShowPhotosViewController : UIViewController{
     NSDictionary *photosDic;
     CGRect rect1;
+    UIImageView *imageView;
+    UIImage *srcImage;
     }
 @property(nonatomic)NSDictionary *photosDic;
 
