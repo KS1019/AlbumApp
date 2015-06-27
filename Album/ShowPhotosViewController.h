@@ -10,6 +10,9 @@
 
 @interface ShowPhotosViewController : UIViewController{
     NSDictionary *photosDic;
-}
+    CGRect rect1;
+    }
 @property(nonatomic)NSDictionary *photosDic;
+
+
 @end

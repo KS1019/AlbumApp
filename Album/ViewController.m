@@ -113,7 +113,7 @@
                     }else if(pt == 0){
                         NSLog(@"else was called");
                         //NSNumber *num = 0;
-                        [pointsDictionary setObject:@"0" forKey:localIdentifier];
+                        [pointsDictionary setObject:[NSNumber numberWithInt:0] forKey:localIdentifier];
                       //[pointsDictionary setObject:[NSNull null] forKey:localIdentifier];
 
                     }
@@ -123,6 +123,7 @@
                                                     
         }];
     }
+    
     int countOfPoints = [pointsDictionary count];
     NSArray *pointsArray = [pointsDictionary allValues];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:nil ascending:NO];

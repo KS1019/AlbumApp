@@ -22,6 +22,9 @@
     
     NSLog(@"photosDic--->%@",photosDic);
     [self sortDictionary];
+    
+    rect1 = [[UIScreen mainScreen] bounds];
+    NSLog(@"rect1.size.width : %f , rect1.size.height : %f", rect1.size.width, rect1.size.height);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,4 +48,7 @@
     
 }
 
+-(void)makeImageView{
+    
+}
 @end
