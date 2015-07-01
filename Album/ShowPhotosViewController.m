@@ -20,8 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     imageView = [UIImageView new];
-    imageView.frame = CGRectMake(100, 100, 100 ,100);
-    
+    //imageView.frame = CGRectMake(100, 100, 100 ,100);
     NSLog(@"photosDic--->%@",photosDic);
     [self sortDictionary];
     
@@ -88,8 +87,12 @@
         
         if (point == 0) {
             trimsize = 100;
-        }else if(point <10){
-            
+        }else if(0 < point && point < 10){
+            trimsize = 200;
+        }else if(10 < point && point < 20){
+            trimsize = 300;
+        }else if(20 < point){
+            trimsize = 400;
         }
         
         
@@ -97,7 +100,7 @@
         // 切り抜く位置を指定するCGRectを作成する。
         // なお簡略化のため、imageW,imageHともに320以上と仮定する。
         
-        CGRect trimArea = CGRectMake(posX, posY, 100, 100);
+        CGRect trimArea = CGRectMake(posX, posY, trimsize, trimsize);
         
         // CoreGraphicsの機能を用いて、
         // 切り抜いた画像を作成する。
@@ -105,7 +108,7 @@
         CGImageRef trimmedImageRef = CGImageCreateWithImageInRect(srcImageRef, trimArea);
         UIImage *trimmedImage = [UIImage imageWithCGImage:trimmedImageRef];
         imageView.image = trimmedImage;
-        //[self.view addSubview:imageView];
+        imageView.frame = CGRectMake(point, point, 100, 100);
         [self.view addSubview:imageView];
     }
 }
