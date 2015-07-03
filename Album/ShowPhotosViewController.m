@@ -27,7 +27,12 @@
     rect1 = [[UIScreen mainScreen] bounds];
     NSLog(@"rect1.size.width : %f , rect1.size.height : %f", rect1.size.width, rect1.size.height);
     
-    [self makeSquareImages];
+    //[self makeSquareImages];
+    
+    // データの要求を受け取る先を自分自身に設定する
+    myCollectionView.dataSource = self;
+    // イベントの受け取り先を自分自身に設定する
+    myCollectionView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -115,5 +120,35 @@
 //-(void)makeImageView{
 //    
 //}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 2;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    if (section == 0) {
+        return 2;
+    }
+    else{
+        return 4;
+    }
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString * cellIdentifier = @"Cell";
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        // １つめのセクションは、背景色を赤にする
+        cell.backgroundColor = [UIColor redColor];
+    }
+    else{
+        // ２つ目のセクションは背景色を緑にする
+        cell.backgroundColor = [UIColor greenColor];
+    }
+    return cell;
+}
+
 
 @end

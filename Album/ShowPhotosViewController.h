@@ -14,6 +14,8 @@
     CGRect rect1;
     UIImageView *imageView;
     UIImage *srcImage;
+    
+    IBOutlet UICollectionView *myCollectionView;
     }
 @property(nonatomic)NSDictionary *photosDic;
 
