@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		7C1364CA1AF88CB80048A3FE /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1364C91AF88CB80048A3FE /* CoreImage.framework */; };
 		7C1364CF1AF8F0160048A3FE /* PhotoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1364CE1AF8F0160048A3FE /* PhotoData.m */; };
+		7C315EAF1B47F4A10027FDAC /* FirstSectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C315EAD1B47F4A10027FDAC /* FirstSectionCell.m */; };
+		7C315EB01B47F4A10027FDAC /* FirstSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C315EAE1B47F4A10027FDAC /* FirstSectionCell.xib */; };
+		7C315EB41B47F4DA0027FDAC /* SecondSectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C315EB21B47F4DA0027FDAC /* SecondSectionCell.m */; };
+		7C315EB51B47F4DA0027FDAC /* SecondSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C315EB31B47F4DA0027FDAC /* SecondSectionCell.xib */; };
 		7C34C5B51AF737EE007347F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34C5B41AF737EE007347F0 /* main.m */; };
 		7C34C5B81AF737EE007347F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34C5B71AF737EE007347F0 /* AppDelegate.m */; };
 		7C34C5BB1AF737EE007347F0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34C5BA1AF737EE007347F0 /* ViewController.m */; };
@@ -46,6 +50,12 @@
 		7C1364C91AF88CB80048A3FE /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		7C1364CD1AF8F0160048A3FE /* PhotoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoData.h; sourceTree = "<group>"; };
 		7C1364CE1AF8F0160048A3FE /* PhotoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoData.m; sourceTree = "<group>"; };
+		7C315EAC1B47F4A10027FDAC /* FirstSectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstSectionCell.h; sourceTree = "<group>"; };
+		7C315EAD1B47F4A10027FDAC /* FirstSectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstSectionCell.m; sourceTree = "<group>"; };
+		7C315EAE1B47F4A10027FDAC /* FirstSectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstSectionCell.xib; sourceTree = "<group>"; };
+		7C315EB11B47F4DA0027FDAC /* SecondSectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondSectionCell.h; sourceTree = "<group>"; };
+		7C315EB21B47F4DA0027FDAC /* SecondSectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondSectionCell.m; sourceTree = "<group>"; };
+		7C315EB31B47F4DA0027FDAC /* SecondSectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondSectionCell.xib; sourceTree = "<group>"; };
 		7C34C5AF1AF737EE007347F0 /* Album.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Album.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C34C5B31AF737EE007347F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C34C5B41AF737EE007347F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -140,6 +150,12 @@
 				7C34C5BC1AF737EE007347F0 /* Main.storyboard */,
 				7C7379A51B2C108C0075A9BA /* ShowPhotosViewController.h */,
 				7C7379A61B2C108C0075A9BA /* ShowPhotosViewController.m */,
+				7C315EAC1B47F4A10027FDAC /* FirstSectionCell.h */,
+				7C315EAD1B47F4A10027FDAC /* FirstSectionCell.m */,
+				7C315EAE1B47F4A10027FDAC /* FirstSectionCell.xib */,
+				7C315EB11B47F4DA0027FDAC /* SecondSectionCell.h */,
+				7C315EB21B47F4DA0027FDAC /* SecondSectionCell.m */,
+				7C315EB31B47F4DA0027FDAC /* SecondSectionCell.xib */,
 				7C34C5BF1AF737EE007347F0 /* Images.xcassets */,
 				7C34C5C11AF737EE007347F0 /* LaunchScreen.xib */,
 				7C34C5B21AF737EE007347F0 /* Supporting Files */,
@@ -286,10 +302,12 @@
 			files = (
 				7C34C5BE1AF737EE007347F0 /* Main.storyboard in Resources */,
 				7C34C5F31AF85900007347F0 /* QBImagePicker.strings in Resources */,
+				7C315EB01B47F4A10027FDAC /* FirstSectionCell.xib in Resources */,
 				7C34C5C31AF737EE007347F0 /* LaunchScreen.xib in Resources */,
 				7C34C5F41AF85900007347F0 /* Info.plist in Resources */,
 				7C34C5C01AF737EE007347F0 /* Images.xcassets in Resources */,
 				7C34C5FA1AF85900007347F0 /* QBImagePicker.storyboard in Resources */,
+				7C315EB51B47F4DA0027FDAC /* SecondSectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,12 +333,14 @@
 				7C34C5F91AF85900007347F0 /* QBCheckmarkView.m in Sources */,
 				7C34C5FC1AF85900007347F0 /* QBSlomoIconView.m in Sources */,
 				7C34C5BB1AF737EE007347F0 /* ViewController.m in Sources */,
+				7C315EAF1B47F4A10027FDAC /* FirstSectionCell.m in Sources */,
 				7C34C5FE1AF85900007347F0 /* QBVideoIndicatorView.m in Sources */,
 				7C34C5F71AF85900007347F0 /* QBAssetCell.m in Sources */,
 				7C7379A71B2C108C0075A9BA /* ShowPhotosViewController.m in Sources */,
 				7C34C5B81AF737EE007347F0 /* AppDelegate.m in Sources */,
 				7C34C5B51AF737EE007347F0 /* main.m in Sources */,
 				7C34C5FD1AF85900007347F0 /* QBVideoIconView.m in Sources */,
+				7C315EB41B47F4DA0027FDAC /* SecondSectionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
