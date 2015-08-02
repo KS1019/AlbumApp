@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondSectionCell : UICollectionViewCell
+@interface SecondSectionCell : UICollectionViewCell{
+    IBOutlet UIImageView *secondImageView;
+}
 
 @end

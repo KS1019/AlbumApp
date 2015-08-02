@@ -13,6 +13,7 @@
 		7C315EB01B47F4A10027FDAC /* FirstSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C315EAE1B47F4A10027FDAC /* FirstSectionCell.xib */; };
 		7C315EB41B47F4DA0027FDAC /* SecondSectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C315EB21B47F4DA0027FDAC /* SecondSectionCell.m */; };
 		7C315EB51B47F4DA0027FDAC /* SecondSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C315EB31B47F4DA0027FDAC /* SecondSectionCell.xib */; };
+		7C32A3921B510DE400BE5B6A /* SampleImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C32A3911B510DE400BE5B6A /* SampleImages.bundle */; };
 		7C34C5B51AF737EE007347F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34C5B41AF737EE007347F0 /* main.m */; };
 		7C34C5B81AF737EE007347F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34C5B71AF737EE007347F0 /* AppDelegate.m */; };
 		7C34C5BB1AF737EE007347F0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C34C5BA1AF737EE007347F0 /* ViewController.m */; };
@@ -56,6 +57,7 @@
 		7C315EB11B47F4DA0027FDAC /* SecondSectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondSectionCell.h; sourceTree = "<group>"; };
 		7C315EB21B47F4DA0027FDAC /* SecondSectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondSectionCell.m; sourceTree = "<group>"; };
 		7C315EB31B47F4DA0027FDAC /* SecondSectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondSectionCell.xib; sourceTree = "<group>"; };
+		7C32A3911B510DE400BE5B6A /* SampleImages.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SampleImages.bundle; sourceTree = "<group>"; };
 		7C34C5AF1AF737EE007347F0 /* Album.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Album.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C34C5B31AF737EE007347F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C34C5B41AF737EE007347F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		7C34C5A61AF737EE007347F0 = {
 			isa = PBXGroup;
 			children = (
+				7C32A3911B510DE400BE5B6A /* SampleImages.bundle */,
 				7C1364C91AF88CB80048A3FE /* CoreImage.framework */,
 				7C34C5D81AF73CF9007347F0 /* Photos.framework */,
 				7C34C5B11AF737EE007347F0 /* Album */,
@@ -147,9 +150,9 @@
 				7C34C5BA1AF737EE007347F0 /* ViewController.m */,
 				7C1364CD1AF8F0160048A3FE /* PhotoData.h */,
 				7C1364CE1AF8F0160048A3FE /* PhotoData.m */,
-				7C34C5BC1AF737EE007347F0 /* Main.storyboard */,
 				7C7379A51B2C108C0075A9BA /* ShowPhotosViewController.h */,
 				7C7379A61B2C108C0075A9BA /* ShowPhotosViewController.m */,
+				7C34C5BC1AF737EE007347F0 /* Main.storyboard */,
 				7C315EAC1B47F4A10027FDAC /* FirstSectionCell.h */,
 				7C315EAD1B47F4A10027FDAC /* FirstSectionCell.m */,
 				7C315EAE1B47F4A10027FDAC /* FirstSectionCell.xib */,
@@ -302,6 +305,7 @@
 			files = (
 				7C34C5BE1AF737EE007347F0 /* Main.storyboard in Resources */,
 				7C34C5F31AF85900007347F0 /* QBImagePicker.strings in Resources */,
+				7C32A3921B510DE400BE5B6A /* SampleImages.bundle in Resources */,
 				7C315EB01B47F4A10027FDAC /* FirstSectionCell.xib in Resources */,
 				7C34C5C31AF737EE007347F0 /* LaunchScreen.xib in Resources */,
 				7C34C5F41AF85900007347F0 /* Info.plist in Resources */,

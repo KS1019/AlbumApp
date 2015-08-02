@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FirstSectionCell : UICollectionViewCell
+@property (strong, nonatomic) IBOutlet UIImageView *firstImageView;
 
 @end

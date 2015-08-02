@@ -15,9 +15,15 @@
     UIImageView *imageView;
     UIImage *srcImage;
     
-    IBOutlet UICollectionView *myCollectionView;
+    IBOutlet UICollectionView *collectionView;
+    IBOutlet UIImageView *imageView;
+    
+    NSMutableArray *imagesArray;
+    
     }
 @property(nonatomic)NSDictionary *photosDic;
+//@property (nonatomic, strong) NSMutableArray * sourceArray;
+//@property (nonatomic, strong) NSMutableArray * sourceArray_bis;
 
 
 @end

@@ -117,6 +117,7 @@
                       //[pointsDictionary setObject:[NSNull null] forKey:localIdentifier];
 
                     }
+                    NSLog(@"===smile===\n\n\n%@\n\n\n==========",features);
                 }
                 
             }
