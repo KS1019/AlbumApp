@@ -37,9 +37,9 @@
     [self makeSquareImages];
     
     // データの要求を受け取る先を自分自身に設定する
-    collectionView.dataSource = self;
+    self.collectionView.dataSource = self;
     // イベントの受け取り先を自分自身に設定する
-    collectionView.delegate = self;
+    self.collectionView.delegate = self;
     
 
     
@@ -52,7 +52,7 @@
 
     //[collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
 
-    [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+//    [UICollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -110,14 +110,19 @@
         int posY = imageH / 2;
         int trimsize = 0;
         
+        
         if (point == 0) {
             trimsize = 100;
+            NSLog(@"\nThis picture : %@ \nPoint : %d\nTrimSize : %d",identifier,point,trimsize);
         }else if(0 < point && point < 10){
             trimsize = 200;
+            NSLog(@"\nThis picture : %@ \nPoint : %d\nTrimSize : %d",identifier,point,trimsize);
         }else if(10 < point && point < 20){
             trimsize = 300;
+            NSLog(@"\nThis picture : %@ \nPoint : %d\nTrimSize : %d",identifier,point,trimsize);
         }else if(20 < point){
             trimsize = 400;
+            NSLog(@"\nThis picture : %@ \nPoint : %d\nTrimSize : %d",identifier,point,trimsize);
         }
         
         
@@ -133,10 +138,6 @@
         CGImageRef trimmedImageRef = CGImageCreateWithImageInRect(srcImageRef, trimArea);
         UIImage *trimmedImage = [UIImage imageWithCGImage:trimmedImageRef];
         
-//        imageView.image = trimmedImage;
-//        imageView.frame = CGRectMake(point, point, 100, 100);
-//        [self.view addSubview:imageView];
-        
         [imagesArray addObject:trimmedImage];
     }
 }
@@ -149,34 +150,25 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-  /*  if (section == 0) {
-        return 2;
-    }
-    else{
-        return 4;
-    }
-   */
+
     return imagesArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString * cellIdentifier = @"Cell";
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-   /*
-    if (indexPath.section == 0) {
-        // １つめのセクションは、背景色を赤にする
-        cell.backgroundColor = [UIColor redColor];
-    }
-    else{
-        // ２つ目のセクションは背景色を緑にする
-        cell.backgroundColor = [UIColor greenColor];
-    }
-    */
-   // UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
+    UICollectionViewCell *cell;
+    
+    cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
+//    NSString *imgName = [NSString stringWithFormat:@"photo%d.JPG", (int)(indexPath.row+1)];
+//    UIImage *image = [UIImage imageNamed:imgName];
     UIImage *image = [imagesArray objectAtIndex:indexPath.row];
     imageView.image = image;
-
+    
+//    UILabel *label = (UILabel *)[cell viewWithTag:2];
+//    label.text = [NSString stringWithFormat:@"No.%d",(int)(indexPath.row+1)];
+    
     return cell;
 }
 

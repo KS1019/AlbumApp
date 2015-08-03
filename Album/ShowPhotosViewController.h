@@ -9,19 +9,21 @@
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
 
-@interface ShowPhotosViewController : UIViewController{
+@interface ShowPhotosViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate>{
     NSDictionary *photosDic;
     CGRect rect1;
     UIImageView *imageView;
     UIImage *srcImage;
     
-    IBOutlet UICollectionView *collectionView;
-    IBOutlet UIImageView *imageView;
-    
+//    @property IBOutlet UICollectionView *collectionView;
+    IBOutlet UIImageView *collectionImageView;
+
     NSMutableArray *imagesArray;
     
     }
 @property(nonatomic)NSDictionary *photosDic;
+@property IBOutlet UICollectionView *collectionView;
+
 //@property (nonatomic, strong) NSMutableArray * sourceArray;
 //@property (nonatomic, strong) NSMutableArray * sourceArray_bis;
 
