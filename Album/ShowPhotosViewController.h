@@ -15,8 +15,6 @@
     UIImageView *imageView;
     UIImage *srcImage;
     
-//    @property IBOutlet UICollectionView *collectionView;
-    IBOutlet UIImageView *collectionImageView;
 
     NSMutableArray *imagesArray;
     

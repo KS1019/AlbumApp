@@ -172,4 +172,32 @@
     return cell;
 }
 
+//セルのサイズをプログラムで変更できる
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+//    if { //笑顔だったらサイズ２倍
+//
+//        returen xxxxx;
+//    } else{ //違ったら普通のサイズ
+//
+//        return yyyy;
+//    }
+    
+    // １セルあたりのサイズを計算
+    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    NSUInteger space = 10;
+    NSUInteger bar = 64;
+    CGSize listCellSize = CGSizeMake((screenSize.size.width - space * 3) / 2,
+                                     (screenSize.size.height - bar - space * 3) / 2);
+    return listCellSize;
+}
+
+
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+
+    return attributes;
+}
 @end
