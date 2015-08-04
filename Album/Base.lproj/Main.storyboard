@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -84,7 +85,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4tF-W3-hIt">
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4tF-W3-hIt">
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                                     <color key="backgroundColor" red="0.1764705882" green="0.6588235294" blue="0.4941176471" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
@@ -92,6 +93,12 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="0.1764705882" green="0.6588235294" blue="0.4941176471" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="4tF-W3-hIt" firstAttribute="leading" secondItem="0sq-fL-M9d" secondAttribute="leadingMargin" constant="-8" id="RGO-FC-K74"/>
+                                            <constraint firstItem="4tF-W3-hIt" firstAttribute="top" secondItem="0sq-fL-M9d" secondAttribute="topMargin" constant="-8" id="Ygg-YB-wIE"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="4tF-W3-hIt" secondAttribute="trailing" constant="-8" id="lux-Vh-uXa"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="4tF-W3-hIt" secondAttribute="bottom" constant="-8" id="n6z-Ly-PG6"/>
+                                        </constraints>
                                         <size key="customSize" width="90" height="90"/>
                                     </collectionViewCell>
                                 </cells>

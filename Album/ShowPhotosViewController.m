@@ -23,16 +23,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    imageView = [UIImageView new];
     //imageView.frame = CGRectMake(100, 100, 100 ,100);
     NSLog(@"photosDic--->%@",photosDic);
     [self sortDictionary];
     
+    imagesDictionary = [NSMutableDictionary new];
     imagesArray = [NSMutableArray new];
-    imagesArray = [NSMutableArray array];
     
     rect1 = [[UIScreen mainScreen] bounds];
     NSLog(@"rect1.size.width : %f , rect1.size.height : %f", rect1.size.width, rect1.size.height);
+    
+    int photoCount = [photosDic count];
+    //最小のセルの大きさを計算
+    cellSize = rect1.size.height * rect1.size.width / photoCount;
+    NSLog(@"\nSmallest Cell Size : %f",cellSize);
+    
     
     [self makeSquareImages];
     
@@ -111,6 +116,15 @@
         int trimsize = 0;
         
         
+        
+        if (point >= 20) {
+            trimsize = 200;
+            NSLog(@"\nThis picture : %@ \nPoint : %d\nTrimSize : %d",identifier,point,trimsize);
+        }else{
+            trimsize = 400;
+            NSLog(@"\nThis picture : %@ \nPoint : %d\nTrimSize : %d",identifier,point,trimsize);
+        }
+        /*
         if (point == 0) {
             trimsize = 100;
             NSLog(@"\nThis picture : %@ \nPoint : %d\nTrimSize : %d",identifier,point,trimsize);
@@ -124,7 +138,7 @@
             trimsize = 400;
             NSLog(@"\nThis picture : %@ \nPoint : %d\nTrimSize : %d",identifier,point,trimsize);
         }
-        
+        */
         
     
         // 切り抜く位置を指定するCGRectを作成する。
@@ -138,8 +152,10 @@
         CGImageRef trimmedImageRef = CGImageCreateWithImageInRect(srcImageRef, trimArea);
         UIImage *trimmedImage = [UIImage imageWithCGImage:trimmedImageRef];
         
+        [imagesDictionary setObject:trimmedImage forKey:srcImage];
         [imagesArray addObject:trimmedImage];
     }
+    NSLog(@"imageDictionary : %@",imagesDictionary);
 }
 
 #pragma mark -UICollectionView
@@ -156,8 +172,8 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"iefjnfnrinerinfifr");
     UICollectionViewCell *cell;
-    
     cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
@@ -165,7 +181,6 @@
 //    UIImage *image = [UIImage imageNamed:imgName];
     UIImage *image = [imagesArray objectAtIndex:indexPath.row];
     imageView.image = image;
-    
 //    UILabel *label = (UILabel *)[cell viewWithTag:2];
 //    label.text = [NSString stringWithFormat:@"No.%d",(int)(indexPath.row+1)];
     
@@ -173,25 +188,36 @@
 }
 
 //セルのサイズをプログラムで変更できる
+/*
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"called");
+    UIImage *image = [imagesArray objectAtIndex:indexPath.row];
+    CGSize listCellSize;
+    float height = image.size.height;
+     if (height == 200){
+     //最小のセルのサイズ
+     // １セルあたりのサイズを計算
+     listCellSize = CGSizeMake(cellSize,cellSize);
+     }else if(height == 400){
+     //違ったら普通のサイズ
+     // １セルあたりのサイズを計算
+     listCellSize = CGSizeMake(cellSize * 2,cellSize * 2);
+     }
+     return listCellSize;
+
+     
     
-//    if { //笑顔だったらサイズ２倍
-//
-//        returen xxxxx;
-//    } else{ //違ったら普通のサイズ
-//
-//        return yyyy;
-//    }
-    
+    /*
     // １セルあたりのサイズを計算
     CGRect screenSize = [[UIScreen mainScreen] bounds];
     NSUInteger space = 10;
     NSUInteger bar = 64;
-    CGSize listCellSize = CGSizeMake((screenSize.size.width - space * 3) / 2,
-                                     (screenSize.size.height - bar - space * 3) / 2);
+    CGSize listCellSize = CGSizeMake(100,
+                                     100);
     return listCellSize;
-}
+     */
+//}
 
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -200,4 +226,5 @@
 
     return attributes;
 }
+
 @end

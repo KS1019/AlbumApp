@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
 
-@interface ShowPhotosViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate>{
+@interface ShowPhotosViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>{
     NSDictionary *photosDic;
     CGRect rect1;
-    UIImageView *imageView;
     UIImage *srcImage;
+    float cellSize;
     
-
     NSMutableArray *imagesArray;
+    NSMutableDictionary *imagesDictionary;
     
     }
 @property(nonatomic)NSDictionary *photosDic;
