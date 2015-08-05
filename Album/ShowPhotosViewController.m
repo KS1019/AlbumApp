@@ -119,7 +119,7 @@
         
         
         
-        if (point >= 20) {
+        if (point <= 20) {
             trimsize = 20;
             NSLog(@"\nThis picture : %@ \nPoint : %d\nTrimSize : %d",identifier,point,trimsize);
         }else{
@@ -186,7 +186,7 @@
     imageView.image = image;
     
     //仮
-    cellSize = 20;
+    cellSize = 40;
     
     CGSize listCellSize;
     float height = image.size.height;
