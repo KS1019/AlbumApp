@@ -175,7 +175,7 @@
     NSLog(@"iefjnfnrinerinfifr");
     UICollectionViewCell *cell;
     cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    
+    int i;
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
 //    NSString *imgName = [NSString stringWithFormat:@"photo%d.JPG", (int)(indexPath.row+1)];
 //    UIImage *image = [UIImage imageNamed:imgName];
