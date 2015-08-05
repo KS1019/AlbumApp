@@ -13,7 +13,7 @@
     NSDictionary *photosDic;
     CGRect rect1;
     UIImage *srcImage;
-    float cellSize;
+    double cellSize;
     
     NSMutableArray *imagesArray;
     NSMutableDictionary *imagesDictionary;

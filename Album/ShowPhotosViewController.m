@@ -36,6 +36,7 @@
     int photoCount = [photosDic count];
     //最小のセルの大きさを計算
     cellSize = rect1.size.height * rect1.size.width / photoCount;
+    cellSize = sqrt(cellSize);
     NSLog(@"\nSmallest Cell Size : %f",cellSize);
     
     
@@ -107,6 +108,7 @@
         // 切り抜き元となる画像を用意する。
         int imageW = srcImage.size.width;
         int imageH = srcImage.size.height;
+        NSLog(@"\nimageW : %d\nimageH : %d",imageW,imageH);
         
         int point = [photosDic valueForKey:identifier];
         NSLog(@"point---->>>%d",point);
@@ -118,10 +120,10 @@
         
         
         if (point >= 20) {
-            trimsize = 200;
+            trimsize = 20;
             NSLog(@"\nThis picture : %@ \nPoint : %d\nTrimSize : %d",identifier,point,trimsize);
         }else{
-            trimsize = 400;
+            trimsize = 40;
             NSLog(@"\nThis picture : %@ \nPoint : %d\nTrimSize : %d",identifier,point,trimsize);
         }
         /*
@@ -154,8 +156,10 @@
         
         [imagesDictionary setObject:trimmedImage forKey:srcImage];
         [imagesArray addObject:trimmedImage];
+        NSLog(@"\ntrimmedImage : %@",NSStringFromCGSize(trimmedImage.size));
     }
     NSLog(@"imageDictionary : %@",imagesDictionary);
+    
 }
 
 #pragma mark -UICollectionView
@@ -175,17 +179,53 @@
     NSLog(@"iefjnfnrinerinfifr");
     UICollectionViewCell *cell;
     cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    int i;
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
 //    NSString *imgName = [NSString stringWithFormat:@"photo%d.JPG", (int)(indexPath.row+1)];
 //    UIImage *image = [UIImage imageNamed:imgName];
     UIImage *image = [imagesArray objectAtIndex:indexPath.row];
     imageView.image = image;
-//    UILabel *label = (UILabel *)[cell viewWithTag:2];
-//    label.text = [NSString stringWithFormat:@"No.%d",(int)(indexPath.row+1)];
     
+    //仮
+    cellSize = 20;
+    
+    CGSize listCellSize;
+    float height = image.size.height;
+    if (height == 20){
+                //最小のセルのサイズ
+                // １セルあたりのサイズを計算
+                listCellSize = CGSizeMake(cellSize,cellSize);
+    }else if(height == 40){
+                //違ったら普通のサイズ
+                // １セルあたりのサイズを計算
+                listCellSize = CGSizeMake(cellSize * 2,cellSize * 2);
+    }
+    
+        CGRect red = cell.frame;
+        red.size = listCellSize;
+        cell.frame = red;
+        NSLog(@"\ncell : %@",cell);
+
+//    UIImage *image2 = [imagesArray objectAtIndex:indexPath.row];
+//    CGSize listCellSize;
+//    float height = image2.size.height;
+//    if (height == 200){
+//        //最小のセルのサイズ
+//        // １セルあたりのサイズを計算
+//        listCellSize = CGSizeMake(cellSize,cellSize);
+//    }else if(height == 400){
+//        //違ったら普通のサイズ
+//        // １セルあたりのサイズを計算
+//        listCellSize = CGSizeMake(cellSize * 2,cellSize * 2);
+//    }
+//
+//    CGRect red = cell.frame;
+//    red.size = listCellSize;
+//    cell.frame = red;
+//    NSLog(@"\ncell : %@",cell);
+//    
     return cell;
 }
+
 
 //セルのサイズをプログラムで変更できる
 /*
@@ -195,27 +235,27 @@
     UIImage *image = [imagesArray objectAtIndex:indexPath.row];
     CGSize listCellSize;
     float height = image.size.height;
-     if (height == 200){
-     //最小のセルのサイズ
-     // １セルあたりのサイズを計算
-     listCellSize = CGSizeMake(cellSize,cellSize);
-     }else if(height == 400){
-     //違ったら普通のサイズ
-     // １セルあたりのサイズを計算
-     listCellSize = CGSizeMake(cellSize * 2,cellSize * 2);
-     }
-     return listCellSize;
-
-     
+    if (height == 200){
+        //最小のセルのサイズ
+        // １セルあたりのサイズを計算
+        listCellSize = CGSizeMake(cellSize,cellSize);
+    }else if(height == 400){
+        //違ったら普通のサイズ
+        // １セルあたりのサイズを計算
+        listCellSize = CGSizeMake(cellSize * 2,cellSize * 2);
+    }
+    return listCellSize;
+    
+    
     
     /*
-    // １セルあたりのサイズを計算
-    CGRect screenSize = [[UIScreen mainScreen] bounds];
-    NSUInteger space = 10;
-    NSUInteger bar = 64;
-    CGSize listCellSize = CGSizeMake(100,
-                                     100);
-    return listCellSize;
+     // １セルあたりのサイズを計算
+     CGRect screenSize = [[UIScreen mainScreen] bounds];
+     NSUInteger space = 10;
+     NSUInteger bar = 64;
+     CGSize listCellSize = CGSizeMake(100,
+     100);
+     return listCellSize;
      */
 //}
 
