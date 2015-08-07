@@ -18,6 +18,8 @@
     NSMutableArray *imagesArray;
     NSMutableDictionary *imagesDictionary;
     
+    UICollectionViewFlowLayout *flowLayout;
+    
     }
 @property(nonatomic)NSDictionary *photosDic;
 @property IBOutlet UICollectionView *collectionView;

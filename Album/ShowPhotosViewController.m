@@ -47,7 +47,17 @@
     // イベントの受け取り先を自分自身に設定する
     self.collectionView.delegate = self;
     
-
+    
+    //FlowLayout作成
+    flowLayout = [UICollectionViewFlowLayout new];
+    //セクションとアイテムの間隔
+    flowLayout.minimumLineSpacing = 3.0;
+    //アイテム同士の間隔
+    flowLayout.minimumInteritemSpacing = 3.0;
+    //コレクションビューへの適用
+    self.collectionView = flowLayout;
+    
+    
     
 //    // UICollectionViewにカスタムセルを追加する
 //    UINib *nibFirst = [UINib nibWithNibName:@"FirstSectionCell" bundle:nil];
@@ -258,6 +268,7 @@
      return listCellSize;
      */
 //}
+
 
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
