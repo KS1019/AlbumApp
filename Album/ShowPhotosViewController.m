@@ -29,15 +29,18 @@
     
     imagesDictionary = [NSMutableDictionary new];
     imagesArray = [NSMutableArray new];
+    setedImagesArray = [NSMutableArray new];
     
-    rect1 = [[UIScreen mainScreen] bounds];
-    NSLog(@"rect1.size.width : %f , rect1.size.height : %f", rect1.size.width, rect1.size.height);
+    selfViewRect = [[UIScreen mainScreen] bounds];
+    NSLog(@"selfViewRect.size.width : %f , selfViewRect.size.height : %f", selfViewRect.size.width, selfViewRect.size.height);
     
     int photoCount = [photosDic count];
     //最小のセルの大きさを計算
-    cellSize = rect1.size.height * rect1.size.width / photoCount;
+    cellSize = selfViewRect.size.height * selfViewRect.size.width / photoCount;
     cellSize = sqrt(cellSize);
     NSLog(@"\nSmallest Cell Size : %f",cellSize);
+    
+    sectionCount = 0;
     
     
     [self makeSquareImages];
@@ -59,14 +62,14 @@
     
     
     
-//    // UICollectionViewにカスタムセルを追加する
+    // UICollectionViewにカスタムセルを追加する
 //    UINib *nibFirst = [UINib nibWithNibName:@"FirstSectionCell" bundle:nil];
-//    [collectionView registerNib:nibFirst forCellWithReuseIdentifier:@"FirstSectionCell"];
+//    [self.collectionView registerNib:nibFirst forCellWithReuseIdentifier:@"FirstSectionCell"];
 //    
 //    UINib *nibSecond = [UINib nibWithNibName:@"SecondSectionCell" bundle:nil];
-//    [collectionView registerNib:nibSecond forCellWithReuseIdentifier:@"SecondSectionCell"];
-
-    //[collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+//    [self.collectionView registerNib:nibSecond forCellWithReuseIdentifier:@"SecondSectionCell"];
+//
+//    [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
 
 //    [UICollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
 }
@@ -169,11 +172,61 @@
         NSLog(@"\ntrimmedImage : %@",NSStringFromCGSize(trimmedImage.size));
     }
     NSLog(@"imageDictionary : %@",imagesDictionary);
+    [self makeImageViews];
     
 }
 
-#pragma mark -UICollectionView
+-(void)makeImageViews{
+    
+    cellSize = 40;
+    
+    for (UIImage * image in imagesArray) {
+        UIImageView * imageview = [UIImageView new];
+        imageview.image = image;
+        
+        CGSize listCellSize;
+        CGPoint listCellPoint;
+        float width = image.size.width;
+        
+        if (width == 20){
+            //最小のセルのサイズ
+            //１セルあたりのサイズを計算
+            listCellSize = CGSizeMake(cellSize,cellSize);
+        }else if(width == 40){
+            //違ったら普通のサイズ
+            // １セルあたりのサイズを計算
+            listCellSize = CGSizeMake(cellSize * 2,cellSize);
+        }
+        
+        
+        if (selfViewRect.size.width > objectsWidth) {
+            NSLog(@"CellPoint if is called");
+            listCellPoint = CGPointMake(objectsWidth, 40 * sectionCount);
+        }else{
+            NSLog(@"CellPoint else is called");
+            sectionCount++;
+            objectsWidth = 0;
+            listCellPoint= CGPointMake(0, 40 * sectionCount);
+        }
+        
+        
+        CGRect imageViewFrame = imageview.frame;
+        imageViewFrame.size = listCellSize;
+        imageview.frame = CGRectMake(listCellPoint.x, listCellPoint.y, listCellSize.width, listCellSize.height);
+        NSLog(@"\nImageView : %@",imageview);
+        
+        int imageWidth = imageViewFrame.size.width;
+        [setedImagesArray addObject:[NSNumber numberWithInt:imageWidth]];
+        objectsWidth += [[setedImagesArray lastObject]intValue];
+        
+        [self.view addSubview:imageview];
+        NSLog(@"\nsetedImagesArray : %@",setedImagesArray);
 
+    }
+}
+
+#pragma mark -UICollectionView
+/*
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
@@ -186,7 +239,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"iefjnfnrinerinfifr");
+    NSLog(@"cellMethod is called");
     UICollectionViewCell *cell;
     cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
@@ -199,43 +252,78 @@
     cellSize = 40;
     
     CGSize listCellSize;
+    CGPoint listCellPoint;
     float height = image.size.height;
     if (height == 20){
-                //最小のセルのサイズ
-                // １セルあたりのサイズを計算
-                listCellSize = CGSizeMake(cellSize,cellSize);
+        
+        
+//        FirstSectionCell *cell1 = [collectionView dequeueReusableCellWithReuseIdentifier:@"FirstSectionCell" forIndexPath:indexPath];
+//        cell1.firstImageView.image = image;
+//        cell = cell1;
+//        return cell1;
+    
+
+        // cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+        //cell.tag = 1;
+        //imageView.image = image;
+        
+        //最小のセルのサイズ
+        //１セルあたりのサイズを計算
+        listCellSize = CGSizeMake(cellSize,cellSize);
+        
     }else if(height == 40){
-                //違ったら普通のサイズ
-                // １セルあたりのサイズを計算
-                listCellSize = CGSizeMake(cellSize * 2,cellSize * 2);
+//        SecondSectionCell *cell2 = [collectionView dequeueReusableCellWithReuseIdentifier:@"SecondSectionCell" forIndexPath:indexPath];
+//        cell2.secondImageView.image = image;
+//        cell = cell2;
+//        return cell2;
+        
+        //cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell2" forIndexPath:indexPath];
+        //cell.tag = 2;
+        //imageView.image = image;
+        
+        //違ったら普通のサイズ
+        // １セルあたりのサイズを計算
+        listCellSize = CGSizeMake(cellSize * 2,cellSize);
     }
     
-        CGRect red = cell.frame;
-        red.size = listCellSize;
-        cell.frame = red;
-        NSLog(@"\ncell : %@",cell);
+    
+    if (selfViewRect.size.width > objectsWidth) {
+        NSLog(@"CellPoint if is called");
+        listCellPoint = CGPointMake(objectsWidth, 40 * sectionCount);
+    }else{
+        NSLog(@"CellPoint else is called");
+        sectionCount++;
+        objectsWidth = 0;
+        listCellPoint= CGPointMake(0, 40 * sectionCount);
+    }
+    
+    
+    CGRect cellFrame = cell.frame;
+    CGRect imageViewFrame = imageView.frame;
+    cellFrame.size = listCellSize;
+    imageViewFrame.size = listCellSize;
+    cell.frame = CGRectMake(listCellPoint.x, listCellPoint.y, listCellSize.width, listCellSize.height);
+    imageView.frame = CGRectMake(listCellPoint.x, listCellPoint.y, listCellSize.width, listCellSize.height);
+    NSLog(@"\ncell : %@",cell);
 
-//    UIImage *image2 = [imagesArray objectAtIndex:indexPath.row];
-//    CGSize listCellSize;
-//    float height = image2.size.height;
-//    if (height == 200){
-//        //最小のセルのサイズ
-//        // １セルあたりのサイズを計算
-//        listCellSize = CGSizeMake(cellSize,cellSize);
-//    }else if(height == 400){
-//        //違ったら普通のサイズ
-//        // １セルあたりのサイズを計算
-//        listCellSize = CGSizeMake(cellSize * 2,cellSize * 2);
-//    }
-//
-//    CGRect red = cell.frame;
-//    red.size = listCellSize;
-//    cell.frame = red;
-//    NSLog(@"\ncell : %@",cell);
-//    
+    int imageWidth = image.size.width;
+    [setedImagesArray addObject:[NSNumber numberWithInt:imageWidth]];
+    objectsWidth = [[setedImagesArray lastObject]intValue];
+
+    NSLog(@"Seted Cell : %@",cell.frame);
     return cell;
 }
 
+*/
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    NSLog(@"viewDidLayoutSubviews is called");
+    [self.view layoutIfNeeded];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    NSLog(@"viewDidAppear is called");
+}
 
 //セルのサイズをプログラムで変更できる
 /*
@@ -257,7 +345,7 @@
     return listCellSize;
     
     
-    
+    */
     /*
      // １セルあたりのサイズを計算
      CGRect screenSize = [[UIScreen mainScreen] bounds];
@@ -271,11 +359,11 @@
 
 
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-
-    return attributes;
-}
+//- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+//
+//    return attributes;
+//}
 
 @end

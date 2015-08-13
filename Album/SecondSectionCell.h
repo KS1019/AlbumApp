@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SecondSectionCell : UICollectionViewCell{
-    IBOutlet UIImageView *secondImageView;
 }
-
+@property IBOutlet UIImageView *secondImageView;
 @end

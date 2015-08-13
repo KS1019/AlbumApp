@@ -11,10 +11,13 @@
 
 @interface ShowPhotosViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>{
     NSDictionary *photosDic;
-    CGRect rect1;
+    CGRect selfViewRect;
     UIImage *srcImage;
     double cellSize;
+    int sectionCount;
+    int objectsWidth;
     
+    NSMutableArray *setedImagesArray;
     NSMutableArray *imagesArray;
     NSMutableDictionary *imagesDictionary;
     
